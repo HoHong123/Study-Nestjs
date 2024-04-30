@@ -26,4 +26,20 @@ export class BoardsService {
         this.boards.push(board);
         return board;
     }
+
+    getBoardID(id: string) : Board {
+        return this.boards.find((boards)=> boards.id == id);
+    }
+
+    deleteBoard(id: string): void {
+        this.boards = this.boards.filter((board)=> board.id !== id);
+    }
+
+    updateBoard(id: string, status: BoardStatus): Board {
+        const board = this.getBoardID(id);
+        
+        board.status = status;
+
+        return board;
+    }
 }

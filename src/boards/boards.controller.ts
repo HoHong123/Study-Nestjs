@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes } from '@nestjs/common';
 import { BoardsService } from './boards.service';
-import { Board } from './boards.model';
+import { Board, BoardStatus } from './boards.model';
 import { CreateBoardDTO } from './dto/create-board.dto';
+import { stat } from 'fs';
+import { pipe } from 'rxjs';
 
 @Controller('boards')
 export class BoardsController {
@@ -25,5 +27,24 @@ export class BoardsController {
         @Body() createBoardDTO: CreateBoardDTO
     ) : Board { 
             return this.boardService.createBoard(createBoardDTO);
+    }
+
+    // Body 값 전송
+    @Get('/:id')
+    getBoardByID(@Param('id') id: string) {
+        return this.boardService.getBoardID(id);
+    }
+
+    @Delete('/:id')
+    deleteBoard(@Param('id') id: string): void {
+        this.boardService.deleteBoard(id);
+    }
+
+    @Patch('/:id/status')
+    updateBoardStatus(
+        @Param('id') id: string,
+        @Body('status') status: BoardStatus
+    ) {
+        return this.boardService.updateBoard(id, status);
     }
 }
