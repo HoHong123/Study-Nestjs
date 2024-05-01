@@ -3,12 +3,18 @@ import { Board, BoardStatus } from './boards.model';
 import { v1 as uuid } from 'uuid';
 import { CreateBoardDTO } from './dto/create-board.dto';
 
+
+// TODO : DAO = Data Access Object로 명칭 변경 예정
 @Injectable()
 export class BoardsService {
     private boards: Board[] = [];
 
     getAllBoards(): Board[] {
         return this.boards;
+    }
+
+    getBoardID(id: string) : Board {
+        return this.boards.find((boards)=> boards.id == id);
     }
 
     createBoard(createBoardDTO: CreateBoardDTO) {
@@ -25,10 +31,6 @@ export class BoardsService {
 
         this.boards.push(board);
         return board;
-    }
-
-    getBoardID(id: string) : Board {
-        return this.boards.find((boards)=> boards.id == id);
     }
 
     deleteBoard(id: string): void {
