@@ -14,7 +14,7 @@ interface BoardCreateReponse {
 }
 
 // Add Exception filter to whole controller
-@UseFilters(HttpExceptionFilter)
+//@UseFilters(HttpExceptionFilter)
 
 @Controller("boards/create")
 export class BoardsCreateController {

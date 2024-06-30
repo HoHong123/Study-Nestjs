@@ -1,9 +1,10 @@
 /** @format */
 
-import { Injectable } from "@nestjs/common";
+import { HttpException, Injectable, NotFoundException } from "@nestjs/common";
 import { Board, BoardStatus } from "./boards.model";
 import { v1 as uuid } from "uuid";
 import { CreateBoardDTO } from "./dto/create-board.dto";
+import errors from "configs/error.config";
 
 // TODO : DAO = Data Access Object로 명칭 변경 예정
 @Injectable()
@@ -15,6 +16,10 @@ export class BoardsService {
 	}
 
 	getBoardID(id: string): Board {
+		if (!id || isNaN(Number(id))) {
+			throw new NotFoundException(errors.notFoundError)
+		}
+
 		return this.boards.find((boards) => boards.id == id);
 	}
 
