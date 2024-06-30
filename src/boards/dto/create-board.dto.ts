@@ -1,4 +1,6 @@
+/** @format */
+
 export class CreateBoardDTO {
-    title: string;
-    description: string;
+	title: string;
+	description: string;
 }

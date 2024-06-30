@@ -1,4 +1,6 @@
-import { Module } from '@nestjs/common';
+/** @format */
+
+import { Module } from "@nestjs/common";
 
 @Module({})
 export class AuthModule {}

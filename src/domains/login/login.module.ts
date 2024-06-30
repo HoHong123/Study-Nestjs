@@ -1,7 +1,9 @@
-import { Module } from '@nestjs/common';
-import { LoginController } from './login.controller';
+/** @format */
+
+import { Module } from "@nestjs/common";
+import { LoginController } from "./login.controller";
 
 @Module({
-  controllers: [LoginController]
+	controllers: [LoginController],
 })
 export class LoginModule {}
