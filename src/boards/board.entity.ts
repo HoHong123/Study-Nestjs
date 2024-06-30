@@ -1,8 +1,8 @@
 /** @format */
 
-import { User } from "src/domains/auth/user.entity";
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { BoardStatus } from "./board-status.enum";
+import { User } from 'src/domains/auth/user.entity';
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { BoardStatus } from './board-status.enum';
 
 @Entity()
 export class Board extends BaseEntity {

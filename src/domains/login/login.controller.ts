@@ -1,6 +1,6 @@
 /** @format */
 
-import { Controller } from "@nestjs/common";
+import { Controller } from '@nestjs/common';
 
-@Controller("login")
+@Controller('login')
 export class LoginController {}

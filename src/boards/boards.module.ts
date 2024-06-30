@@ -1,9 +1,9 @@
 /** @format */
 
-import { Module } from "@nestjs/common";
-import { BoardsController } from "./controllers/boards.controller";
-import { BoardsService } from "./boards.service";
-import { BoardsCreateController } from "./controllers/boards-create.controller";
+import { Module } from '@nestjs/common';
+import { BoardsService } from './boards.service';
+import { BoardsCreateController } from './controllers/boards-create.controller';
+import { BoardsController } from './controllers/boards.controller';
 
 @Module({
 	controllers: [BoardsController, BoardsCreateController],
