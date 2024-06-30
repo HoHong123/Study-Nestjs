@@ -14,7 +14,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     // Log the exception before response
     this.logger.error(
-      '${request.method} ${request.originalUrl} ${status} error: ${exception.message}',
+      `${request.method} ${request.originalUrl} ${ctxStatus} error: ${exception.message}`,
     );
 
     const errorDetail = exception.getResponse();
