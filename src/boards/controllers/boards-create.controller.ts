@@ -1,9 +1,10 @@
 /** @format */
 
-import { Body, Controller, Post, UseFilters } from "@nestjs/common";
-import { BoardsService } from "../boards.service";
-import { Board, BoardStatus } from "../boards.model";
-import { HttpExceptionFilter } from "src/exception-filter/http-exception.filter";
+import { Body, Controller, Post, UseInterceptors } from '@nestjs/common';
+import { Board, BoardStatus } from '../boards.model';
+import { BoardsService } from '../boards.service';
+import { DefaultInterceptor } from 'src/custom-interceptor/default.interceptor';
+//import { HttpExceptionFilter } from "src/exception-filter/http-exception.filter";
 
 interface BoardCreateRequest {
 	id: string;
@@ -16,7 +17,9 @@ interface BoardCreateReponse {
 // Add Exception filter to whole controller
 //@UseFilters(HttpExceptionFilter)
 
-@Controller("boards/create")
+@UseInterceptors(DefaultInterceptor)
+
+@Controller('boards/create')
 export class BoardsCreateController {
 	constructor(private boardService: BoardsService) {}
 
@@ -34,8 +37,8 @@ export class BoardsCreateController {
 		return {
 			board: {
 				id: id,
-				title: "testing",
-				description: "nest js request testing",
+				title: 'testing',
+				description: 'nest js request testing',
 				status: BoardStatus.PUBLIC,
 			},
 		};
