@@ -1,43 +1,33 @@
 /** @format */
 
-import { Body, Controller, Post, UseFilters } from "@nestjs/common";
-import { BoardsService } from "../boards.service";
-import { Board, BoardStatus } from "../boards.model";
-import { HttpExceptionFilter } from "src/exception-filter/http-exception.filter";
+import { Body, Controller, Logger, Post, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
+import { DefaultInterceptor } from 'src/interceptor/default.interceptor';
+import { Board, BoardStatus } from '../boards.model';
+import { CreateBoardDto } from '../dto/create-board.dto';
+import { BoardsService } from '../boards.service';
+import { TimeoutError } from 'rxjs';
 
-interface BoardCreateRequest {
-	id: string;
-}
-
-interface BoardCreateReponse {
+interface BoardCreateResponse {
 	board: Board;
 }
 
 // Add Exception filter to whole controller
 //@UseFilters(HttpExceptionFilter)
 
-@Controller("boards/create")
+@UseInterceptors(DefaultInterceptor)
+
+@Controller('boards/create')
 export class BoardsCreateController {
 	constructor(private boardService: BoardsService) {}
+    private readonly logger = new Logger("Intercept");
 
 	// GET, POST, DELETE, PUT
 	// Body 값 전송
 	@Post()
+	@UsePipes(new ValidationPipe({ whitelist: true }))
 	// Add Exception filter to this function
 	//@UseFilters(HttpExceptionFilter)
-	post(@Body() reqData: BoardCreateRequest): BoardCreateReponse {
-		const { id } = reqData;
-
-		// 데이터베이스 연동시 서비스로 board 멤버 변수 초기화
-		//throw new MyException(ErrorCode.DEFAULT, "Default Error out");
-
-		return {
-			board: {
-				id: id,
-				title: "testing",
-				description: "nest js request testing",
-				status: BoardStatus.PUBLIC,
-			},
-		};
+	post(@Body() reqData: CreateBoardDto): BoardCreateResponse {
+		return { board: this.boardService.createBoard(reqData) };
 	}
 }

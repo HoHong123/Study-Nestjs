@@ -1,6 +1,6 @@
 /** @format */
 
-import Testing, { ErrorCode, TestCode } from "src/enum/error-code.enum";
+import Testing, { ErrorCode, TestCode } from 'src/enum/error-code.enum';
 
 export default interface Response {
 	code: ErrorCode;

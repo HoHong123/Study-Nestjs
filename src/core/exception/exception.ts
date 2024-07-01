@@ -1,6 +1,6 @@
 /** @format */
 
-import { ErrorCode } from "src/enum/error-code.enum";
+import { ErrorCode } from 'src/enum/error-code.enum';
 
 export class MyException extends Error {
 	code: ErrorCode;
