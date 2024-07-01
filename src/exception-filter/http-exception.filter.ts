@@ -7,7 +7,7 @@ import { Request, Response } from 'express';
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
 	// Add Logger later
-	constructor(private logger: Logger) {}
+    private readonly logger = new Logger("HttpException");
 
 	catch(exception: HttpException, host: ArgumentsHost) {
 		const context 	= host.switchToHttp();
@@ -16,15 +16,15 @@ export class HttpExceptionFilter implements ExceptionFilter {
 		const ctxStatus = exception.getStatus();
 
 		// Log the exception before response
-		this.logger.error(
-			`${request.method} ${request.originalUrl} ${ctxStatus} error: ${exception.message}`,
-		);
+		this.logger.error(`${request.method} ${ctxStatus} : ${exception.message} \'${request.originalUrl}\'`);
 
-		const errorDetail = exception.getResponse();
+		const errorDetail = errors[ctxStatus] || errors.default;
 		response.status(ctxStatus).json({
-			code: response.statusCode, 
-			error: true, 
-			errorDetail 
+			code: errorDetail.code,
+			path: request.url,
+			error: errorDetail.error,
+			message: errorDetail.message,	
+			timestamp: new Date().toISOString(),
 		});
 	}
 }

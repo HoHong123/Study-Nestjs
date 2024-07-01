@@ -2,7 +2,7 @@
 
 import { Controller, Get, Param, UseInterceptors } from '@nestjs/common';
 import { BoardsService } from '../boards.service';
-import { DefaultInterceptor } from 'src/custom-interceptor/default.interceptor';
+import { DefaultInterceptor } from 'src/interceptor/default.interceptor';
 
 @UseInterceptors(DefaultInterceptor)
 
