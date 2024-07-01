@@ -7,9 +7,9 @@ export const typeORMConfig: TypeOrmModuleOptions = {
 	type: "postgres",
 	host: "localhost",
 	port: 5432,
-	username: "postgres",
+	username: "nestjs_user",
 	password: "ghdrl007",
-	database: "nest-app",
+	database: "nestjs_project",
 	entities: [Board],
 	synchronize: true,
 };
