@@ -1,8 +1,8 @@
 /** @format */
 
 import { Controller, Get, Param, UseInterceptors } from '@nestjs/common';
-import { BoardsService } from '../boards.service';
-import { DefaultInterceptor } from 'src/interceptor/default.interceptor';
+import { BoardsService } from '../boards.dao';
+import { DefaultInterceptor } from 'src/core/interceptor/default.interceptor';
 
 @UseInterceptors(DefaultInterceptor)
 
@@ -13,7 +13,7 @@ export class BoardsController {
 	// GET, POST, DELETE, PUT
 	// Body 값 전송
 	@Get()
-	getBoardByID(@Param('id') id: string) {
-		return this.boardService.getBoardID(id);
+	getBoardByID(@Param('id') id: number) {
+		return this.boardService.getBoardByID(id);
 	}
 }

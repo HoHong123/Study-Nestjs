@@ -6,7 +6,7 @@ import { Transform } from "class-transformer";
 
 export class CreateBoardDto {
 	@IsNotEmpty()
-	id: string;
+	id: number;
 
 	@IsNotEmpty()
 	title: string;

@@ -1,9 +1,8 @@
 /** @format */
 
-import { Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { HttpExceptionFilter } from './exception-filter/http-exception.filter';
+import { NestFactory } from '@nestjs/core';
+import { HttpExceptionFilter } from './core/exception-filter/http-exception.filter';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
@@ -15,3 +14,6 @@ async function bootstrap() {
 }
 
 bootstrap();
+
+// 모듈화
+// + 모듈화의 범주는 정답은 없으나 게임은 단일 모듈의 장점이 조금 더 높은 편이다.

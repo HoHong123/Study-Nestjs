@@ -1,12 +1,11 @@
 /** @format */
 
-import { User } from 'src/domains/auth/user.entity';
 import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { BoardStatus } from './board-status.enum';
 
 @Entity()
 export class Board extends BaseEntity {
-	@PrimaryGeneratedColumn()
+	@PrimaryGeneratedColumn('uuid')
 	id: number;
 
 	@Column()
@@ -15,9 +14,6 @@ export class Board extends BaseEntity {
 	@Column()
 	description: string;
 
-	@Column()
-	status: BoardStatus;
-
-	@ManyToOne((type) => User, (user) => user.boards, { eager: false })
-	user: User;
+	@Column({type: 'tinyint'})
+	status: number;
 }
